@@ -27,6 +27,18 @@ pipeline {
                sh 'docker build -t papireddy527/apr_banking-finance .'
                     }
                 }
+      stage('Docker-Login') {
+           steps {
+               withCredentials([usernamePassword(credentialsId: 'Docker_login', passwordVariable: 'apr@1234', usernameVariable: 'apr')]) {
+               sh 'docker login -u ${apr} -p ${apr@1234}'
+                                   }
+                        }
+                }
+       stage('Push-Image') {
+           steps {
+               sh 'docker push papireddy527/apr_banking-finance'
+                     }
+                }
        
       
      
